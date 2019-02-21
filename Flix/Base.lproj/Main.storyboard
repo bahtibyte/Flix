@@ -22,7 +22,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="separatorColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryCell" rowHeight="190" id="ugs-ri-t4d" customClass="CategoryCell" customModule="Flix" customModuleProvider="target">
@@ -69,17 +68,13 @@
                                                             </connections>
                                                         </collectionViewCell>
                                                     </cells>
-                                                    <connections>
-                                                        <outlet property="dataSource" destination="BYZ-38-t0r" id="hn2-mB-9SV"/>
-                                                        <outlet property="delegate" destination="BYZ-38-t0r" id="kgf-57-Ga1"/>
-                                                    </connections>
                                                 </collectionView>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="categoryTitle" destination="VUc-ac-lh4" id="z7f-yG-pqb"/>
-                                            <outlet property="collectionView" destination="WF6-xi-esG" id="5M3-4K-COY"/>
+                                            <outlet property="collectionView" destination="WF6-xi-esG" id="UqO-RF-mGt"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>

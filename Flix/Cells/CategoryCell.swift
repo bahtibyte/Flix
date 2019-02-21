@@ -10,10 +10,11 @@ import UIKit
 
 class CategoryCell: UITableViewCell {
     
-    @IBOutlet weak var collectionView: UICollectionView!
+    //@IBOutlet weak var collectionView: UICollectionView!
     
     @IBOutlet weak var categoryTitle: UILabel!
     
+    @IBOutlet weak var collectionView: UICollectionView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,6 +29,7 @@ class CategoryCell: UITableViewCell {
     
     func registerCollectionView<DataSource: UICollectionViewDataSource>(datasource: DataSource) {
         self.collectionView.dataSource = datasource;
+        self.collectionView.reloadData()
     }
     
 }

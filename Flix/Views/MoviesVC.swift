@@ -104,12 +104,13 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
                     
                     self.assaignMovies(connectTo: self.links.getSpecificGenreURL() + String(id), index: (i + 2))
                     
+                    self.tableView.reloadData()
                 }
                 
-                print("Size of genre \(self.genres.count)")
-                for i in 0 ... 20 {
-                    print("Genre: \(self.genres[i].getGenre()) [\(i)] has \(self.genres[i].getMovies().count) movies")
-                }
+                //print("Size of genre \(self.genres.count)")
+                //for i in 0 ... 20 {
+                //    print("Genre: \(self.genres[i].getGenre()) [\(i)] has \(self.genres[i].getMovies().count) movies")
+                //}
             }
         }
         
@@ -129,10 +130,13 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         cell.collectionView.tag = indexPath.row
         cell.categoryTitle.text = self.genres[indexPath.row].getGenre()
         
+        //print("I am here \(indexPath.row)")
+        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        //print("PLEASE WORK")
         return self.genres[collectionView.tag].getMovies().count
     }
     

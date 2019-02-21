@@ -33,7 +33,7 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         genres.append(Genre(genre: "Popular", genreIndex: 1, genreID: 0))
         
         assaignMovies(connectTo: links.getUpComingURL(), index: 0)
-        assaignMovies(connectTo: links.getPopularURL(), index: 0)
+        assaignMovies(connectTo: links.getPopularURL(), index: 1)
         
         
         populateGenres()
@@ -130,8 +130,7 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         cell.collectionView.tag = indexPath.row
         cell.categoryTitle.text = self.genres[indexPath.row].getGenre()
         
-        //print("I am here \(indexPath.row)")
-        
+        //cell.collectionView?.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: false)
         return cell
     }
     
@@ -153,7 +152,7 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         let posterURL = URL(string: self.links.getBaseURL() + posterPath)
         
         
-        print("Row: \(collectionView.tag) Col: \(indexPath.row) Movie: \(movie["title"]!)")
+        //print("Row: \(collectionView.tag) Col: \(indexPath.row) Movie: \(movie["title"]!)")
         
         cell.image.af_setImage(withURL: posterURL!)
         

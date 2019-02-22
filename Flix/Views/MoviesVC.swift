@@ -13,14 +13,14 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
 
     @IBOutlet weak var tableView: UITableView!
     
-    @IBOutlet weak var navigationBar: UINavigationItem!
-    
-    var movies = [[String:Any]]()
     
     var genres = [Genre]()
     var links = Links()
     
     var count = 0
+    
+    @IBOutlet weak var nav: UINavigationItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,11 +35,7 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         assaignMovies(connectTo: links.getUpComingURL(), index: 0)
         assaignMovies(connectTo: links.getPopularURL(), index: 1)
         
-        
         populateGenres()
-        //assaignMovies(connectTo: links.getUpComingURL(), string: "Up Coming", num: 0)
-        //assaignMovies(connectTo: links.getPopularURL(), string: "Popular", num: 0)
-       
     }
     
     func assaignMovies(connectTo link: String, index n: Int){
@@ -129,7 +125,7 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         cell.registerCollectionView(datasource: self)
         cell.collectionView.tag = indexPath.row
         cell.categoryTitle.text = self.genres[indexPath.row].getGenre()
-        
+        cell.selectionStyle = .none
         //cell.collectionView?.setContentOffset(CGPoint(x: 0.0, y: 0.0), animated: false)
         return cell
     }

@@ -12,13 +12,11 @@ class Genre {
     
     var genre:String!
     var index:Int!
-    var id:Int!
     
     var movies = [[String:Any]]()
     
-    init(genre type: String, genreIndex tag: Int, genreID num: Int) {
+    init(genre type: String, genreIndex tag: Int) {
         self.genre = type
-        self.id = num
     }
     
     func assignMovies(listOfMovies m : [[String:Any]]) {
@@ -29,9 +27,6 @@ class Genre {
         return genre
     }
     
-    func getID() -> Int {
-        return id
-    }
     
     func getMovies() -> [[String:Any]] {
         return movies

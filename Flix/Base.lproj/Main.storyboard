@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Movie Flicks-->
+        <!--Orbit-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MoviesVC" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
@@ -84,9 +84,8 @@
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Movie Flicks" id="haA-ub-1Ec"/>
+                    <navigationItem key="navigationItem" title="Orbit" id="haA-ub-1Ec"/>
                     <connections>
-                        <outlet property="nav" destination="haA-ub-1Ec" id="ZdP-ct-EVw"/>
                         <outlet property="tableView" destination="uoW-z8-gHd" id="jnt-RX-0XZ"/>
                     </connections>
                 </viewController>

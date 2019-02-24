@@ -1,5 +1,5 @@
 //
-//  MoreMovieCell.swift
+//  SearchCell.swift
 //  Flix
 //
 //  Created by Bahti on 2/24/19.
@@ -8,7 +8,8 @@
 
 import UIKit
 
-class MoreMovieCell: UICollectionViewCell {
-    @IBOutlet weak var movieImage: UIImageView!
+class SearchCell: UICollectionViewCell {
+    
+    @IBOutlet weak var searchImage: UIImageView!
     var row: Int!
 }

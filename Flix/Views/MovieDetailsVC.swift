@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-class MovieDetailsVC: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate{
+class MovieDetailsVC: UIViewController, UICollectionViewDataSource {
     
     @IBOutlet weak var backdropIV: UIImageView!
     @IBOutlet weak var posterIV: UIImageView!
@@ -33,6 +33,8 @@ class MovieDetailsVC: UIViewController, UICollectionViewDataSource, UICollection
         //print("At the details page, i know \(movie["title"])")
         // Do any additional setup after loading the view.
         
+        //print("I am now here \(movie)")
+        
         titleLabel.text = movie["title"] as? String
         titleLabel.sizeToFit()
         detailsLabel.text = movie["overview"] as? String
@@ -41,7 +43,6 @@ class MovieDetailsVC: UIViewController, UICollectionViewDataSource, UICollection
         releaseDateLabel.text = movie["release_date"] as? String
         
         collectionView.dataSource = self
-        collectionView.delegate = self
         
         //let posterPath = movie["poster_path"] as! String
         
@@ -122,13 +123,15 @@ class MovieDetailsVC: UIViewController, UICollectionViewDataSource, UICollection
         if (similarMovies.count <= indexPath.row) {
             return cell
         }
-        print("S: \(similarMovies.count) R: \(indexPath.row)")
+        //print("S: \(similarMovies.count) R: \(indexPath.row)")
         let movie = similarMovies[indexPath.row]
         
         if let path = movie["poster_path"] as? String
         {
             //Creates a new url for the poster
             let posterURL = URL(string: self.links.getBaseURL() + path)
+            
+            cell.row = indexPath.row
             
             //Sets the imageview on the cell to be the image of the posterpath
             cell.movieImage.af_setImage(withURL: posterURL!)
@@ -137,20 +140,15 @@ class MovieDetailsVC: UIViewController, UICollectionViewDataSource, UICollection
         return cell
     }
     
-
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath)
-    }
-
-    
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        let cell = sender as! MoreMovieCell
+        
+        let dest = segue.destination as! MovieDetailsVC
+        dest.movie = similarMovies[cell.row]
     }
-    */
+ 
 
 }

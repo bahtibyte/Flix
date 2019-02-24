@@ -99,21 +99,82 @@
             </objects>
             <point key="canvasLocation" x="-946.39999999999998" y="1341.6791604197902"/>
         </scene>
-        <!--View Controller-->
+        <!--Search For Movie-->
         <scene sceneID="be4-Op-vMy">
             <objects>
-                <viewController id="PY1-Ur-urx" sceneMemberID="viewController">
+                <viewController id="PY1-Ur-urx" customClass="SearchVC" customModule="Flix" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IHG-6q-Di3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="PGR-r3-cX5">
+                                <rect key="frame" x="0.0" y="64" width="375" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="375" id="IKx-0k-lAq"/>
+                                    <constraint firstAttribute="height" constant="56" id="pUC-qF-FdW"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bvi-kc-qQO">
+                                <rect key="frame" x="5" y="120" width="365" height="498"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="365" id="MMZ-o2-gHx"/>
+                                    <constraint firstAttribute="height" constant="498" id="ylh-B4-4T5"/>
+                                </constraints>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="waV-bU-Xyz">
+                                    <size key="itemSize" width="114" height="172"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="SearchCell" id="zvW-mP-Sc7" customClass="SearchCell" customModule="Flix" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="114" height="172"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="114" height="172"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jnz-u8-XfJ">
+                                                    <rect key="frame" x="0.0" y="0.0" width="114" height="172"/>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" red="1" green="0.1230347854" blue="0.13776745060000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstItem="Jnz-u8-XfJ" firstAttribute="top" secondItem="zvW-mP-Sc7" secondAttribute="top" id="AcP-dF-RdH"/>
+                                            <constraint firstAttribute="trailing" secondItem="Jnz-u8-XfJ" secondAttribute="trailing" id="Sel-0C-0Lh"/>
+                                            <constraint firstItem="Jnz-u8-XfJ" firstAttribute="leading" secondItem="zvW-mP-Sc7" secondAttribute="leading" id="dhh-gt-mn6"/>
+                                            <constraint firstAttribute="bottom" secondItem="Jnz-u8-XfJ" secondAttribute="bottom" id="j5F-eQ-flO"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="searchImage" destination="Jnz-u8-XfJ" id="ufp-zX-kAZ"/>
+                                            <segue destination="HG2-Xa-LOg" kind="show" id="oxJ-zR-7hY"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="bvi-kc-qQO" firstAttribute="leading" secondItem="bTF-5t-kf5" secondAttribute="leading" constant="5" id="Hc7-S3-1Sd"/>
+                            <constraint firstItem="PGR-r3-cX5" firstAttribute="trailing" secondItem="bTF-5t-kf5" secondAttribute="trailing" id="SEL-Wf-Cb2"/>
+                            <constraint firstItem="PGR-r3-cX5" firstAttribute="top" secondItem="bTF-5t-kf5" secondAttribute="top" id="ewT-3f-bj3"/>
+                            <constraint firstItem="bvi-kc-qQO" firstAttribute="top" secondItem="PGR-r3-cX5" secondAttribute="bottom" id="npq-xc-5Lh"/>
+                            <constraint firstItem="PGR-r3-cX5" firstAttribute="leading" secondItem="bTF-5t-kf5" secondAttribute="leading" id="vYW-au-6TJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="bTF-5t-kf5"/>
                     </view>
-                    <navigationItem key="navigationItem" id="gqa-GR-QfI"/>
+                    <navigationItem key="navigationItem" title="Search For Movie" id="gqa-GR-QfI"/>
+                    <connections>
+                        <outlet property="collectionView" destination="bvi-kc-qQO" id="ret-XN-4MR"/>
+                        <outlet property="searchBar" destination="PGR-r3-cX5" id="Axa-5f-0Qe"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1f1-ri-cqj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1068" y="1342"/>
+            <point key="canvasLocation" x="88.799999999999997" y="1341.6791604197902"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gA6-Ua-PxA">
@@ -240,6 +301,7 @@
                                                         </constraints>
                                                         <connections>
                                                             <outlet property="movieImage" destination="tr3-Sc-3HS" id="AVc-30-gi8"/>
+                                                            <segue destination="HG2-Xa-LOg" kind="show" id="uUH-Ey-DWC"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
@@ -351,7 +413,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ne-vZ-aSF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1068" y="486"/>
+            <point key="canvasLocation" x="89" y="485"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="2ws-y9-MK8">
@@ -367,7 +429,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="J0R-Nn-2cG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="89" y="1342"/>
+            <point key="canvasLocation" x="1068" y="1342"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="a1o-de-4Tg">
@@ -386,10 +448,13 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tUo-gU-qOX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="89" y="487"/>
+            <point key="canvasLocation" x="1068" y="485"/>
         </scene>
     </scenes>
     <resources>
         <image name="home" width="30" height="30"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oxJ-zR-7hY"/>
+    </inferredMetricsTieBreakers>
 </document>

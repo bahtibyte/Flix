@@ -179,7 +179,10 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         //Grabs the current movie on the column
         let movie = movies[indexPath.row]
         
+        //Assigns the row of the collectionview to the cell
         cell.row = collectionView.tag
+        
+        //Assigns the col of the cell on to the movie cell
         cell.col = indexPath.row
         
         //Makes sure the path for the poster exists and does not fail
@@ -196,13 +199,23 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         return cell
     }
     
-    override func prepare(for seque: UIStoryboardSegue, sender: Any?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
+        //Grabs the cell that was selected
         let cell = sender as! MovieCell
         
+        //Grabs the row index for the cell
         let genreIndex = cell.row!
+        
+        //Grabs the col index for the cell
         let movieIndex = cell.col!
         
-        print("You selected \(genres[genreIndex].getGenre()) genre and movie \((genres[genreIndex].getMovies()[movieIndex])["title"]!)")
+        //This is the view controller that we are being sent to
+        let destinationVC = segue.destination as! MovieDetailsVC
+        
+        //Sets the movie that was selected on to the view controller
+        destinationVC.movie = genres[genreIndex].getMovies()[movieIndex]
+        
+        //print("You selected \(genres[genreIndex].getGenre()) genre and movie \((genres[genreIndex].getMovies()[movieIndex])["title"]!)")
     }
 }

@@ -10,6 +10,7 @@ import UIKit
 
 class MovieCell: UICollectionViewCell {
     
+    //The image on the movie cell
     @IBOutlet weak var image: UIImageView!
     
     var row: Int!

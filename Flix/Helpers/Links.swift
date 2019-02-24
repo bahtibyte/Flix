@@ -24,16 +24,13 @@ class Links {
     private let baseUrl = "https://image.tmdb.org/t/p/w185"
 
     private let searchUrl = "https://api.themoviedb.org/3/search/movie?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&query="
-    
-    
-    
+     
     
     init() {
         
     }
     
     func getSimilar(movieID id: Int) -> String {
-        
         let front = "https://api.themoviedb.org/3/movie/"
         
         let end = "/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"
@@ -52,7 +49,6 @@ class Links {
     func getUpComingURL() -> String {
         return upcoming
     }
-    
     
     func getPopularURL() -> String {
         return popular

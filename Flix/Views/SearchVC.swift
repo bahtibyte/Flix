@@ -10,57 +10,48 @@ import UIKit
 
 class SearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDelegate, UICollectionViewDelegate {
    
-
+    //References to the collectionview and the searchbar
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var searchBar: UISearchBar!
     
+    //All the movies for the search query stored in this
     var movies = [[String:Any]]()
-    let links = Links()
     
-    var finishedLastSearch = true
+    //Helper class to keep track of api links
+    let links = Links()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        //Gives the reference to datasource and delegate so they work
         self.collectionView.dataSource = self
         self.collectionView.delegate = self
         self.searchBar.delegate = self
-        
-         //self.searchBar.showsCancelButton = true
-        
-        // Do any additional setup after loading the view.
     }
     
-    
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    //When a movie is clicked, it brings up more details about that movie
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-        let cell = sender as! SearchCell
         
-        let dest = segue.destination as! MovieDetailsVC
-        dest.movie = movies[cell.row]
-        
+        //Turns off the search bar when a movie is selected
         searchBar.endEditing(true)
         
+        //Grabs the cell that was clicked and casts it
+        let cell = sender as! SearchCell
         
+        //Grabs the destination in which the cell is taking
+        let dest = segue.destination as! MovieDetailsVC
+        
+        //Sets the movie on the destination
+        dest.movie = movies[cell.row]
     }
- 
-    /*
-    @objc func tapped() {
-        self.searchBar.endEditing(true)
-        print("TAPPING")
-    }*/
     
+    //Searches and assigns the movies from given keyword
     func search(text searchText: String) {
         
-        finishedLastSearch = false
-        
+        //Replaces the spaces with valid string so the api works
         let path = searchText.replacingOccurrences(of: " ", with: "%20")
         
+        //Creates the path to the api to request the data
         let pathUrl = links.getSearchURL() + path
         
         //Connects with the web and retrieves the data
@@ -77,10 +68,10 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDelegat
             
             // This will run when the network request returns
             if let error = error {
-                print("Error in MovieDetailsVC")
+                print(error)
             }
                 
-                //This happens if it retrieved the data correctly
+            //This happens if it retrieved the data correctly
             else if let data = data {
                 
                 //Retrieves the entire data from the link
@@ -88,10 +79,6 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDelegat
                 
                 //Grabs the results section of the data
                 self.movies = dataDictionary["results"] as! [[String:Any]]
-                
-                print(self.movies.count)
-                
-                //finishedLastSearch = true
                 
                 //Reloads the table view with the newly updated data
                 self.collectionView.reloadData()
@@ -102,45 +89,67 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDelegat
         task.resume()
     }
     
+    //This method gets called everytime a change in the search bar happens
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
         
+        //If there are at least 3 characters, it starts searching the web for the movies
         if (searchText.count >= 3){
+            
+            //Calls the helper function search to search for that keyword
             search(text: searchText)
         }else if (searchText.count < 3){
+            
+            //Deletes all the movies
             movies = [[String:Any]]()
+            
+            //Removes all the cells
             self.collectionView.reloadData()
         }
         
     }
+    
+    //This method gets called when the search button is clicked on the keyboard
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        //Closes the keyboard to make space on the ui
         searchBar.resignFirstResponder()
     }
     
+    //Returns the number of cells the collection view should have
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        //Makes sure there are only multiples of 3 cells
         return (movies.count) - movies.count % 3
     }
     
-    
+    //Creates the new cell for every single movie
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        //Creates a new cell of type SearchCell
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCell", for: indexPath) as! SearchCell
         
+        //A safe heaven to make sure the cells do not go out of boungs
         if (movies.count <= indexPath.row) {
             return cell
         }
-        //print("S: \(similarMovies.count) R: \(indexPath.row)")
+        
+        //Grabs the specific movie from that row
         let movie = movies[indexPath.row]
         
+        //Makes sure that the poster exists for that movie
         if let path = movie["poster_path"] as? String
         {
             //Creates a new url for the poster
             let posterURL = URL(string: self.links.getBaseURL() + path)
             
+            //Keeps track of what row that cell is
             cell.row = indexPath.row
             
             //Sets the imageview on the cell to be the image of the posterpath
             cell.searchImage.af_setImage(withURL: posterURL!)
         }
         
+        //Returns the cell to be placed on the collection view
         return cell
     }
     

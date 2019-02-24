@@ -51,7 +51,7 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             
              // This will run when the network request returns
             if let error = error {
-                //print("Error retrieving data from \(link)\n\(error.localizedDescription)")
+                print("Error retrieving data from \(link)\n\(error.localizedDescription)")
             }
             
             //This happens if it retrieved the data correctly
@@ -92,7 +92,7 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
             
             //This will run when the network request returns
             if let error = error {
-                //print(error.localizedDescription)
+                print("Error in MoviesVC ~ PopulateGenres \n\(error.localizedDescription)")
             }
             
             //This happens if it retrieved the data correctly

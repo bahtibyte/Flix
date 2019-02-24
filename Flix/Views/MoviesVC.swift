@@ -179,6 +179,9 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         //Grabs the current movie on the column
         let movie = movies[indexPath.row]
         
+        cell.row = collectionView.tag
+        cell.col = indexPath.row
+        
         //Makes sure the path for the poster exists and does not fail
         if let path = movie["poster_path"] as? String
         {
@@ -191,5 +194,15 @@ class MoviesVC: UIViewController, UITableViewDataSource, UITableViewDelegate, UI
         
         //Returns the cell for that column
         return cell
+    }
+    
+    override func prepare(for seque: UIStoryboardSegue, sender: Any?) {
+        
+        let cell = sender as! MovieCell
+        
+        let genreIndex = cell.row!
+        let movieIndex = cell.col!
+        
+        print("You selected \(genres[genreIndex].getGenre()) genre and movie \((genres[genreIndex].getMovies()[movieIndex])["title"]!)")
     }
 }

@@ -12,4 +12,6 @@ class MovieCell: UICollectionViewCell {
     
     @IBOutlet weak var image: UIImageView!
     
+    var row: Int!
+    var col: Int!
 }

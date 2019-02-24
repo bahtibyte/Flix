@@ -27,15 +27,11 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDelegat
         self.collectionView.delegate = self
         self.searchBar.delegate = self
         
-        //let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tapped))
-        //collectionView.addGestureRecognizer(tapGesture)
-        
          //self.searchBar.showsCancelButton = true
         
         // Do any additional setup after loading the view.
     }
     
-
     
     // MARK: - Navigation
 
@@ -47,6 +43,10 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDelegat
         
         let dest = segue.destination as! MovieDetailsVC
         dest.movie = movies[cell.row]
+        
+        searchBar.endEditing(true)
+        
+        
     }
  
     /*
@@ -106,12 +106,20 @@ class SearchVC: UIViewController, UICollectionViewDataSource, UISearchBarDelegat
         
         if (searchText.count >= 3){
             search(text: searchText)
+        }else if (searchText.count < 3){
+            movies = [[String:Any]]()
+            self.collectionView.reloadData()
         }
         
     }
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return (movies.count) - movies.count % 3
     }
+    
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "SearchCell", for: indexPath) as! SearchCell

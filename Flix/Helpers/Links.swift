@@ -31,6 +31,15 @@ class Links {
         
     }
     
+    func getSimilar(movieID id: Int) -> String {
+        
+        let front = "https://api.themoviedb.org/3/movie/"
+        
+        let end = "/similar?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&language=en-US&page=1"
+        
+        return front + String(id) + end
+    }
+    
     func getAllGenreURL() -> String {
         return allGenre
     }

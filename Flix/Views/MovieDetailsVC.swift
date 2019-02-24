@@ -11,10 +11,17 @@ import AlamofireImage
 
 class MovieDetailsVC: UIViewController {
     
-    @IBOutlet weak var backDropIV: UIImageView!
+    @IBOutlet weak var backdropIV: UIImageView!
     @IBOutlet weak var posterIV: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailsLabel: UILabel!
+    @IBOutlet weak var releaseDateLabel: UILabel!
+    
+    
+    
+    
+    
+    
     
     var movie: [String:Any]!
     let links = Links()
@@ -22,24 +29,45 @@ class MovieDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("At the details page, i know \(movie["title"])")
+        //print("At the details page, i know \(movie["title"])")
         // Do any additional setup after loading the view.
         
         titleLabel.text = movie["title"] as? String
         titleLabel.sizeToFit()
         detailsLabel.text = movie["overview"] as? String
         detailsLabel.sizeToFit()
-        let posterPath = movie["poster_path"] as! String
         
-        let path = URL(string: links.getBaseURL() + posterPath)
+        releaseDateLabel.text = movie["release_date"] as? String
         
-        posterIV.af_setImage(withURL: path!)
+        //let posterPath = movie["poster_path"] as! String
         
-        let backdropPath = movie["backdrop_path"] as! String
+        if let posterPath = movie["poster_path"] as? String
+        {
+            let path = URL(string: links.getBaseURL() + posterPath)
+            
+            posterIV.af_setImage(withURL: path!)
+        }else{
+            print("Error")
+        }
         
-        let backdropUrl = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath)
+        //let path = URL(string: links.getBaseURL() + posterPath)
         
-        backDropIV.af_setImage(withURL: backdropUrl!)
+        //posterIV.af_setImage(withURL: path!)
+        
+        if let backdropPath = movie["backdrop_path"] as? String
+        {
+            let backdropUrl = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath)
+            
+            backdropIV.af_setImage(withURL: backdropUrl!)
+        }else{
+            print("ERROR")
+        }
+        
+        //let backdropPath = movie["backdrop_path"] as! String
+        
+        //let backdropUrl = URL(string: "https://image.tmdb.org/t/p/w780" + backdropPath)
+        
+        //backdropIV.af_setImage(withURL: backdropUrl!)
     }
     
 
